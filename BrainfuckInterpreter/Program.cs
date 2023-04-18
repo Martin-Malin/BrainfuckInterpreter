@@ -29,7 +29,7 @@ internal class Program
                 case '.':
                     byte byteOutput = GetValue();
                     string consoleOutput = Encoding.ASCII.GetString(new byte[] { byteOutput });
-                    Console.WriteLine(consoleOutput);
+                    Console.Write(consoleOutput);
                     break;
                 case ',':
                     char key = Console.ReadKey().KeyChar;
@@ -48,7 +48,7 @@ internal class Program
                 case ']':
                     if (data[pointer] != 0)
                     {
-                        i = loopIndexes.Last() -1;
+                        i = loopIndexes.Last() - 1;
                         loopIndexes.RemoveAt(loopIndexes.Count - 1);
                     }
                     break;
@@ -74,12 +74,18 @@ internal class Program
 
     public static void IncreaseData()
     {
-        data[pointer]++;
+        if (data[pointer] == byte.MaxValue)
+            data[pointer] = byte.MinValue;
+        else
+            data[pointer]++;
     }
 
     public static void DecreaseData()
     {
-        data[pointer]--;
+        if (data[pointer] == byte.MinValue)
+            data[pointer] = byte.MaxValue;
+        else
+            data[pointer]--;
     }
 
     public static byte GetValue()
