@@ -1,7 +1,17 @@
-﻿internal class Program
+﻿using BrainfuckInterpreter;
+
+internal class Program
 {
     private static void Main(string[] args)
     {
-        Console.WriteLine("Hello, World!");
+        string[] commands = args[0].Split("");
+
+        DataArray dataArray = new DataArray();
+        List<Command> commandes = new List<Command>();
+
+        for (int i = 0; i < commands.Length; i++)
+        {
+            commandes.Add(new Command(dataArray, commands[i]));
+        }
     }
 }
