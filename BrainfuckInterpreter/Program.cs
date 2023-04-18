@@ -7,47 +7,49 @@ internal class Program
 
     private static void Main(string[] args)
     {
-        string[] commands = args[0].Split("");
+        char[] commands = args[0].ToCharArray();
 
         List<int> loopIndexes = new List<int>();
         for (int i = 0; i < commands.Length; i++)
         {
             switch (commands[i])
             {
-                case "+":
+                case '+':
                     IncreaseData();
                     break;
-                case "-":
+                case '-':
                     DecreaseData();
                     break;
-                case "<":
+                case '<':
                     PreviousByte();
                     break;
-                case ">":
+                case '>':
                     NextByte();
                     break;
-                case ".":
+                case '.':
                     byte byteOutput = GetValue();
                     string consoleOutput = Encoding.ASCII.GetString(new byte[] { byteOutput });
-                    Console.Write(consoleOutput);
+                    Console.WriteLine(consoleOutput);
                     break;
-                case ",":
-                    int key = Console.Read();
-                    byte[] byteInput = Encoding.ASCII.GetBytes(Convert.ToChar(key).ToString());
+                case ',':
+                    char key = Console.ReadKey().KeyChar;
+                    byte[] byteInput = Encoding.ASCII.GetBytes(key.ToString());
                     SetValue(byteInput[0]);
                     break;
-                case "[":
+                case '[':
+                    loopIndexes.Add(i);
+
                     if (data[pointer] == 0)
                     {
-                        loopIndexes.Add(pointer);
                         do
-                        { i++; } while (commands[i] != "]");
+                        { i++; } while (commands[i] != ']');
                     }
                     break;
-                case "]":
+                case ']':
                     if (data[pointer] != 0)
                     {
-                        i = loopIndexes.Last();
+                        i = loopIndexes.Last() -1;
+                        loopIndexes.RemoveAt(loopIndexes.Count - 1);
                     }
                     break;
             }
@@ -59,7 +61,7 @@ internal class Program
         if (pointer == data.Length)
             pointer = 0;
         else
-            ++pointer;
+            pointer++;
     }
 
     public static void PreviousByte()
@@ -67,17 +69,17 @@ internal class Program
         if (pointer == 0)
             pointer = 30000;
         else
-            --pointer;
+            pointer--;
     }
 
     public static void IncreaseData()
     {
-        ++data[pointer];
+        data[pointer]++;
     }
 
     public static void DecreaseData()
     {
-        --data[pointer];
+        data[pointer]--;
     }
 
     public static byte GetValue()
