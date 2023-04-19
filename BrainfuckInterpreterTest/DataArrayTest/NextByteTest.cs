@@ -1,6 +1,6 @@
 ﻿using BrainfuckInterpreter;
 
-namespace BrainfuckInterpreterTest.CommandTest
+namespace BrainfuckInterpreterTest.DataArrayTest
 {
     [TestClass]
     public class NextByteTest
@@ -12,16 +12,16 @@ namespace BrainfuckInterpreterTest.CommandTest
         {
             int expected = Random.Shared.Next(30000);
             for (int index = 0; index < expected; ++index)
-                this.dataArray.NextByte();
-            Assert.AreEqual<int>(expected, this.dataArray.Pointer);
+                dataArray.NextByte();
+            Assert.AreEqual(expected, dataArray.Pointer);
         }
 
         [TestMethod]
         public void Call30001Times_Equals0()
         {
             for (int index = 0; index < 30001; ++index)
-                this.dataArray.NextByte();
-            Assert.AreEqual<int>(0, this.dataArray.Pointer);
+                dataArray.NextByte();
+            Assert.AreEqual(0, dataArray.Pointer);
         }
     }
 }

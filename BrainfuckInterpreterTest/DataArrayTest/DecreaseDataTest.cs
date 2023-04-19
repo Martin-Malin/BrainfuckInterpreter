@@ -3,7 +3,7 @@ using BrainfuckInterpreter;
 namespace BrainfuckInterpreterTest.DataArrayTest
 {
     [TestClass]
-    public class IncreaseDataTest
+    public class DecreaseDataTest
     {
         DataArray dataArray = new DataArray();
 
@@ -11,20 +11,20 @@ namespace BrainfuckInterpreterTest.DataArrayTest
         public void CallNextNTimes_EqualsN()
         {
             int expected = Random.Shared.Next(byte.MaxValue);
-            for (int index = 0; index < expected; ++index)
+            for (int index = 0; index < expected; index++)
                 dataArray.IncreaseData();
 
-            Assert.AreEqual(expected, dataArray.GetData());
+            dataArray.DecreaseData();
+            Assert.AreEqual(expected - 1, dataArray.GetData());
         }
 
 
         [TestMethod]
-        public void Call256Times_Equals0()
+        public void FirstCall_Equals255()
         {
-            for (int i = 0; i < 256; i++)
-                dataArray.IncreaseData();
+            dataArray.DecreaseData();
 
-            Assert.AreEqual(0, dataArray.GetData());
+            Assert.AreEqual(255, dataArray.GetData());
         }
     }
 }

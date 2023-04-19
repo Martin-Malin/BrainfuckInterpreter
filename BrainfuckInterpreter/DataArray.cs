@@ -17,7 +17,7 @@
             if (this.Pointer == this.data.Length)
                 this.Pointer = 0;
             else
-                ++this.Pointer;
+                this.Pointer++;
         }
 
         public void PreviousByte()
@@ -25,25 +25,25 @@
             if (this.Pointer == 0)
                 this.Pointer = 30000;
             else
-                --this.Pointer;
+                this.Pointer--;
         }
 
         public void IncreaseData()
         {
-            ++this.data[this.Pointer];
+            this.data[this.Pointer]++;
         }
 
         public void DecreaseData()
         {
-            --this.data[this.Pointer];
+            this.data[this.Pointer]--;
         }
 
-        public byte Read()
+        public byte GetData()
         {
             return this.data[this.Pointer];
         }
 
-        public void Set(byte value)
+        public void SetData(byte value)
         {
             this.data[this.Pointer] = value;
         }

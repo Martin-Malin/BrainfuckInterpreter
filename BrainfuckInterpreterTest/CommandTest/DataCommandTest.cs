@@ -5,17 +5,17 @@ namespace BrainfuckInterpreterTest.CommandTest
     [TestClass]
     public class DataCommandTest
     {
-        private DataArray _dataArray = new DataArray();
-        private Dictionary<string, Action> DataCommands;
+        private DataArray dataArray = new DataArray();
+        private Dictionary<string, Action> dataCommands;
 
         public DataCommandTest()
         {
-            this.DataCommands = new Dictionary<string, Action>()
+            dataCommands = new Dictionary<string, Action>()
             {
-                {"+", this._dataArray.IncreaseData },
-                {"-", this._dataArray.DecreaseData },
-                {">", this._dataArray.NextByte },
-                {"<", this._dataArray.PreviousByte },
+                {"+", dataArray.IncreaseData },
+                {"-", dataArray.DecreaseData },
+                {">", dataArray.NextByte },
+                {"<", dataArray.PreviousByte },
                 {".", null },
                 {",", null },
                 {"[", null },
@@ -26,9 +26,9 @@ namespace BrainfuckInterpreterTest.CommandTest
         [TestMethod]
         public void GiveCommand_ReturnAction()
         {
-            foreach (KeyValuePair<string, Action> dataCommand1 in this.DataCommands)
+            foreach (KeyValuePair<string, Action> dataCommand1 in dataCommands)
             {
-                Action dataCommand2 = new Command(this._dataArray, dataCommand1.Key).DataCommand;
+                Action dataCommand2 = new Command(dataArray, dataCommand1.Key).DataCommand;
                 Assert.AreEqual<Action>(dataCommand1.Value, dataCommand2, "Commande '" + dataCommand1.Key + "'.");
             }
         }
